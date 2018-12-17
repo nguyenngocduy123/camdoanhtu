@@ -1,0 +1,171 @@
+﻿@model CamDoAnhTu.Models.Customer
+
+
+<script src="~/Scripts/jquery-3.0.0.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<style>
+    .style-table {
+        display: table;
+        width: 100%;
+        max-width: 90%;
+        margin-top: 7px;
+        margin-bottom: 9px;
+        min-height: 24px;
+    }
+
+        .style-table .style-table-cell {
+            display: table-cell;
+        }
+
+            .style-table .style-table-cell * {
+                vertical-align: bottom;
+            }
+
+    .dashed-style {
+        border-bottom: #9d9d9d dashed 1px;
+        height: 20px;
+        display: block;
+        text-align:center;
+    }
+</style>
+
+<h1 style="text-align:center">GIẤY BIÊN NHẬN</h1>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 65px;">Họ và tên:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            @Model.Name
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 65px;">CMTND:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 65px;">Ngày cấp:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 65px;">Nơi cấp:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 130px;">Hộ khẩu thường trú:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 80px;">SDT liên hệ:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            @Model.Phone
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 130px;">SDT vợ hoặc chồng:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 65px;">Hôm nay, </div>
+
+    <div class="style-table-cell" style="width: 30px;">ngày:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            @Model.StartDate.Day
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 30px;">tháng:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            @Model.StartDate.Month
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 10px;">năm:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            @Model.StartDate.Year
+        </span>
+    </div>
+</div>
+
+
+<div class="style-table">
+    <div class="style-table-cell" style="width: 140px;">Tôi có nhận của anh</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+            <b>Trần Đăng Tú</b>
+        </span>
+    </div>
+</div>
+
+<div class="style-table">
+    <div class="style-table-cell" style="width: 65px;">Số CMND:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<div class="style-table">
+    <div class="style-table-cell" style="width: 90px;">Với số tiền là:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 65px;">Bằng chữ:</div>
+    <div class="style-table-cell">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<br />
+Để mua hộ cho anh <b>Trần Đăng Tú</b> chiếc xe máy HonDa Wave .
+Tôi có hẹn sau 10 ngày kể từ ngày nhận tiền sẽ giao xe cho anh Trần Đăng Tú như đã
+thỏa thuận. Nếu không giao được xe đúng hẹn tôi xin hoàn trả lại số tiền mà tôi đã
+nhận là ......................... Bằng chữ ........................................
+<div class="style-table" style="width:35%">
+    <div class="style-table-cell" style="width: 100px;">Một lần duy nhất</div>
+
+    <div class="style-table-cell" style="width: 50px;">vào ngày </div>
+    <div class="style-table-cell" style="width:10%">
+        <span class="dashed-style">
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 30px;">tháng:</div>
+    <div class="style-table-cell" style="width:10%">
+        <span class="dashed-style">
+        </span>
+    </div>
+    <div class="style-table-cell" style="width: 10px;">năm:</div>
+    <div class="style-table-cell" style="width:10%">
+        <span class="dashed-style">
+        </span>
+    </div>
+</div>
+<br />
+Tôi cam đoan sự việc trên là đúng nếu sai tôi xin hoàn toàn chịu trách nhiệm .
+

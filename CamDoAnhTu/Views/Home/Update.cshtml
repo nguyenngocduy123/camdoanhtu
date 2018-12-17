@@ -1,0 +1,255 @@
+﻿@model CamDoAnhTu.Models.MyViewModel
+
+@section css{
+    <link href="~/Assets/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+    <link href="~/Assets/Simple-Date-Picker-for-Bootstrap/css/datepicker.css" rel="stylesheet" />
+    <link href="~/Assets/silviomoreto-bootstrap-select-a8ed49e/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/Assets/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" />
+}
+
+@section js{
+    <script src="~/Assets/Simple-Date-Picker-for-Bootstrap/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="~/autoNumeric-master/autoNumeric-master/autoNumeric.js"></script>
+    <script src="~/Assets/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+    @*<script src="~/Assets/bootstrap-fileinput-master/js/fileinput.min.js"></script>*@
+    @*<script src="~/Assets/silviomoreto-bootstrap-select-a8ed49e/dist/js/bootstrap-select.min.js"></script>*@
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        $.validator.addMethod("imageOnly", function (value, element) {
+            return this.optional(element) || /^.+\.(jpg|JPG|png|PNG)$/.test(value);
+        });
+
+        $("#frmaAddCustomer").validate({
+            rules: {
+                'model.Code': {
+                    required: true
+                    //codeCheck: true
+                },
+                'model.Name': {
+                    required: true
+                },
+                'model.fuMain': {
+                    imageOnly: true
+                },
+                'model.Phone': {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 11
+                },
+                'model.Address': {
+                    required: true
+                },
+                'model.Price': {
+                    required: true,
+                    number: true
+                },
+                'model.Loan': {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                'model.Code': {
+                    required: 'Chưa nhập mã số'
+                    //codeCheck: 'Mã số này đã tồn tại'
+                },
+                'model.Name': {
+                    required: 'Chưa nhập tên khách hàng'
+                },
+                'model.fuMain': {
+                    imageOnly: 'Không đúng định dạng hình ảnh'
+                },
+                'model.Phone': {
+                    required: 'Chưa nhập số điện thoại',
+                    number: 'Nhập sđt không đúng định dạng',
+                    minlength: 'Ít nhất 10 số',
+                    maxlength: 'Nhiều nhất 11 số'
+                },
+                'model.Address': {
+                    required: 'Chưa nhập địa chỉ'
+                },
+                'model.Price': {
+                    required: 'Chưa nhập số tiền phải trả trong 1 ngày',
+                    number: 'Phải là số'
+                },
+                'model.Loan': {
+                    required: 'Chưa nhập tổng nợ',
+                    number: 'Phải là số'
+                }
+
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            //errorPlacement: function (error, element) {
+            //    var alertDiv = $('.alert-warning', $('#registerForm'));
+            //    error.appendTo(alertDiv);
+            //},
+
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            success: function (label) {
+                label.closest('.form-group').removeClass('has-error');
+                //label.closest('.form-group').removeClass('has-success');
+
+                //var name = label.attr('for');
+                //$('[name=' + name + ']').closest('.form-group').removeClass('has-error');
+                label.remove();
+            }
+
+        });
+
+        //$('.selectpicker').selectpicker();
+        $('input[type=file]').bootstrapFileInput();
+
+        $("#fuMain").fileinput({
+            'allowedFileExtensions': ['jpg', 'png', 'gif']
+        });
+
+        jQuery(function ($) {
+            $('.auto').autoNumeric('init', { vMax: '99999999999999999' });
+        });
+
+        $('form').submit(function () {
+            var form = $(this);
+            $('input').each(function (i) {
+                var self = $(this);
+                try {
+                    var v = self.autoNumeric('get');
+                    self.autoNumeric('destroy');
+                    self.val(v);
+                } catch (err) {
+                    console.log("Not an autonumeric field: " + self.attr("name"));
+                }
+            });
+            return true;
+        });
+
+        $(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //Month starts from 0
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            today = dd + '/' + mm + '/' + yyyy;
+
+            $("#model_StartDate").val(today);
+            $("#model_StartDate").datepicker({ dateFormat: "dd/mm/yy" }).val();
+
+        });
+
+        
+    </script>
+
+}
+
+<h2 style="font-size: 30px; color: red;border: firebrick">Chỉnh sửa thông tin khách hàng</h2>
+<form class="form-horizontal" method="post" action="" id="frmaAddCustomer" enctype="multipart/form-data">
+
+    @Html.TextBoxFor(m => m.model.DayPaids, new { @type = "hidden" })
+    @Html.TextBoxFor(m => m.model.AmountPaid, new { @type = "hidden" })
+    @Html.TextBoxFor(m => m.model.RemainingAmount, new { @type = "hidden" })
+    @Html.HiddenFor(m => m.model.type, new { @value = @Model.model.type })
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="alert alert-warning alert-dismissable hidden" role="alert">
+                <button type="button" class="close" data-dissmiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <img class="file-preview-image" style="height: 160px;width: auto" title="@Model.model.Name" alt="@Model.model.Name" src="~/image/@Model.model.Code/main.jpg" />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Hình ảnh:</label>
+        @Html.TextBoxFor(model => model.fuMain, new { @type = "file", @class = "file" })
+
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Mã số:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Code, new { @class = "form-control", @readonly = "readonly"})
+        </div>
+        <label class="col-sm-2 control-label">Tên khách hàng:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Name, new { @class = "form-control" })
+        </div>
+        <label class="col-sm-2 control-label">Mã số cũ (nếu có):</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.OldCode, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Điện thoại:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Phone, new { @class = "form-control" })
+        </div>
+        <label class="col-sm-2 control-label">Ngày bắt đầu:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.StartDate, Model.model.StartDate.ToString("dd/MM/yyyy"), new { @class = "form-control" })
+
+        </div>
+        <label class="col-sm-2 control-label">Địa chỉ:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Address, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Tổng nợ:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Loan, new { @class = "form-control ", @readonly = "readonly" })
+        </div>
+        <label class="col-sm-2 control-label">Số tiền trả trong 1 ngày:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.Price, new { @class = "form-control ", @readonly = "readonly" })
+        </div>
+        <label class="col-sm-2 control-label">Tiền gốc:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.tiengoc, new { @class = "form-control auto" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Loại giấy tờ:</label>
+        <div class="col-sm-2">
+            @Html.DropDownListFor(m => m.SelectedLoaiGiayTo, (SelectList)ViewBag.ListLoaiGiayTo, new { @class = "form-control" })
+        </div>
+
+        <label class="col-sm-2 control-label">Số ngày được phép nợ thêm:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.model.DayBonus, new { @class = "form-control" })
+        </div>
+    </div>
+    <div>
+        <label class="col-sm-2 control-label">Ghi chú:</label>
+        @Html.TextAreaFor(m => m.model.Note, 10, 55, null)
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" id="save" class="btn btn-danger">
+                <i class="fa fa-check"></i>&nbsp;Lưu
+            </button>
+            <a class="btn btn-success" href="@Url.Action("LoadCustomer","Home",new {type = @Model.model.type})" role="button">
+                <i class="fa fa-mail-reply"></i>Trang khách hàng
+            </a>
+        </div>
+    </div>
+</form>
+
+

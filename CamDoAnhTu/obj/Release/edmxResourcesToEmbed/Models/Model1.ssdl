@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="camcdb3d_camdothanhluanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="history">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Ngaydongtien" Type="datetime" />
+    <Property Name="Detail" Type="nvarchar(max)" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="status" Type="int" />
+    <Property Name="loanid" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Loan" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="RemainingAmount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DayPaids" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="NgayNo" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayBonus" Type="int" />
+    <Property Name="OldCode" Type="varchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CodeSort" Type="int" />
+    <Property Name="type" Type="int" />
+    <Property Name="songayno" Type="int" />
+    <Property Name="nodung" Type="bit" />
+    <Property Name="tentaisan" Type="nvarchar(max)" />
+    <Property Name="loaigiayto" Type="int" Nullable="false" />
+    <Property Name="tiengoc" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="lai" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Loan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="IDCus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Type" Type="bit" Nullable="false" />
+    <Property Name="money" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="PassWord" Type="varchar" MaxLength="50" />
+    <Property Name="Permission" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_cuahang" Type="int" />
+  </EntityType>
+  <Function Name="GetCustomerEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan" />
+  <Function Name="GetCustomerOdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan" />
+  <Function Name="GetTienGoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+    <Parameter Name="type" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTienLai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+    <Parameter Name="type" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetTienLaiThatTe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+    <Parameter Name="type" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SumMoneyByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+    <Parameter Name="datetimeinput" Type="datetime" Mode="In" />
+    <Parameter Name="type" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="camcdb3d_camdothanhluanModelStoreContainer">
+    <EntitySet Name="history" EntityType="Self.history" Schema="camcdb3d_camdothanhluan" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,294 @@
+﻿@*@{
+        Layout = null;
+    }*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lí cầm đồ Anh Tú</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/Assets/Admin/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    @*<link href="/Assets/Admin/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">*@
+    <!-- Timeline CSS -->
+    @*<link href="/Assets/Admin/dist/css/timeline.css" rel="stylesheet">*@
+    <!-- Custom CSS -->
+    <link href="/Assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    @*<link href="/Assets/Admin/bower_components/morrisjs/morris.css" rel="stylesheet">*@
+    <!-- Custom Fonts -->
+    <link href="/Assets/Admin//bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("css", required: false)
+</head>
+<body>
+
+    @RenderBody()
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm ngày nợ</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3">ID Khách hàng</label>
+                                <div class="col-sm-9 bolder blue">
+                                    <input type="text" class="form-control" id="Customercode" name="Customercode" readonly />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3">Ngày đóng nợ</label>
+                                <div class="col-sm-9 bolder blue">
+                                    <input type="text" class="form-control" id="txtStartDate" name="StartDate" value="@string.Format("{0:dd/MM/yyyy}",DateTime.Now)" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3">Số tiền</label>
+                                <div class="col-sm-9 bolder blue">
+                                    <input type="text" class="form-control auto" id="txtPrice" name="txtPrice" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3"></label>
+                                <div class="col-sm-9">
+                                    <button type="button" class="btn btn-primary btn-sm no-border" id="buttonId">
+                                        <i class="icon-save bigger-110"></i>
+                                        Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+
+    <script src="/Assets/Admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Assets/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../shared/jquery-ui/jquery-ui.min.js"></script>
+
+    <script src="~/Assets/Simple-Date-Picker-for-Bootstrap/js/bootstrap-datepicker.js"></script>
+    <script src="~/Assets/jquery.min.js"></script>
+    <script src="~/autoNumeric-master/autoNumeric-master/autoNumeric.js"></script>
+    <script src="~/Assets/jquery-ui-1.11.2.custom/jquery-ui.js"></script>
+    <script src="~/Assets/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+    <script src="~/Assets/silviomoreto-bootstrap-select-a8ed49e/dist/js/bootstrap-select.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*<script>
+        $(document).on("click", ".open-AddBookDialog", function () {
+            $('#txtPrice').val('');
+
+            var myBookId = $(this).data('id');
+            $(".modal-body #Customercode").val(myBookId);
+            
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            $('#myModal').modal('show');
+        });
+
+        $('#buttonId').click(function () { //On click of your button
+            
+
+            var IDCus = $("#Customercode").val();
+            var Date = $('#txtStartDate').val(); //Get the values from the page you want to post
+            var Money = $('#txtPrice').val();
+            //var Money = parseFloat(moneyStr);
+
+
+            var JSONObject = { // Create JSON object to pass through AJAX
+                Date: Date, //Make sure these names match the properties in VM
+                Money: Money,
+                IDCus: IDCus
+            };
+
+            $.ajax({ //Do an ajax post to the controller
+                type: 'POST',
+                url: '/Home/AddLoan',
+                data: JSON.stringify(JSONObject),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (xhr) {
+                    alert('Error: ' + xhr.statusText);
+
+                    $('#myModal').modal('hide');
+                },
+                success: function (result) {
+                    $('#amount_' + IDCus).val(result.amountpaid);
+                    $('#remain_' + IDCus).val(result.remainingamount);
+
+                    $('#myModal').modal('hide');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        jQuery(function ($) {
+            $('.auto').autoNumeric('init');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('form').submit(function () {
+            var form = $(this);
+            $('input').each(function (i) {
+                var self = $(this);
+                try {
+                    var v = self.autoNumeric('get');
+                    self.autoNumeric('destroy');
+                    self.val(v);
+                } catch (err) {
+                    console.log("Not an autonumeric field: " + self.attr("name"));
+                }
+            });
+            return true;
+        });
+    </script>
+
+    <script type="text/javascript">
+        $.validator.addMethod("imageOnly", function (value, element) {
+            return this.optional(element) || /^.+\.(jpg|JPG|png|PNG)$/.test(value);
+        });
+
+        $.validator.addMethod("codeCheck", function (value, element) {
+            var isSuccess = false;
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Home/GetUserByUsername',
+                data: { uname: value },
+                success:
+                    function (data) {
+                        if (data == 1) {
+                            isSuccess = true;
+                        } else {
+                            isSuccess = false;
+                        }
+                    },
+                async: false
+            });
+            return isSuccess;
+        });
+
+        $("#frmaAddCustomer").validate({
+            rules: {
+                Code: {
+                    required: true,
+                    codeCheck: true
+                },
+                Name: {
+                    required: true
+                },
+                fuMain: {
+                    imageOnly: true
+                },
+                Phone: {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 11
+                },
+                Address: {
+                    required: true
+                },
+
+                Loan: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                Code: {
+                    required: 'Chưa nhập mã số',
+                    codeCheck: 'Mã số này đã tồn tại'
+                },
+                Name: {
+                    required: 'Chưa nhập tên khách hàng'
+                },
+                fuMain: {
+                    imageOnly: 'Không đúng định dạng hình ảnh'
+                },
+                Phone: {
+                    required: 'Chưa nhập số điện thoại',
+                    number: 'Nhập sđt không đúng định dạng',
+                    minlength: 'Ít nhất 10 số',
+                    maxlength: 'Nhiều nhất 11 số'
+                },
+                Address: {
+                    required: 'Chưa nhập địa chỉ'
+                },
+
+                Loan: {
+                    required: 'Chưa nhập tổng nợ',
+                    number: 'Phải là số'
+                }
+
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            //errorPlacement: function (error, element) {
+            //    var alertDiv = $('.alert-warning', $('#registerForm'));
+            //    error.appendTo(alertDiv);
+            //},
+
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            success: function (label) {
+                label.closest('.form-group').removeClass('has-error');
+                //label.closest('.form-group').removeClass('has-success');
+
+                //var name = label.attr('for');
+                //$('[name=' + name + ']').closest('.form-group').removeClass('has-error');
+                label.remove();
+            }
+
+        });
+
+        $('.selectpicker').selectpicker();
+        $('input[type=file]').bootstrapFileInput();
+
+        $("#fuMain").fileinput({
+            'allowedFileExtensions': ['jpg', 'png', 'gif']
+        });
+
+    </script>
+
+    <script>
+
+        $(function () {
+            $("#txtStartDate").datepicker({ dateFormat: "dd/mm/yy" }).val();
+        });
+
+    </script>*@
+
+
+    @RenderSection("js", required: false)
+</body>
+</html>

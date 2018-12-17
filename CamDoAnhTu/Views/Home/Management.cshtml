@@ -1,0 +1,208 @@
+﻿@using CamDoAnhTu.Models;
+
+@model List<Customer>
+@{
+    int type = (int)ViewBag.type;
+}
+@if (type == -1)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Quản lí khách hàng</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = -1})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == -2) // new customer
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Quản lí BCMZ</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = -2})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 1)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số B</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 1})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 2)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số C</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 2})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 3)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số M</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 3})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 4)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số Z</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 4})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 5)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số Y</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 5})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+else if (type == 6)
+{
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-automobile fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.Count</div>
+                        <div>Mã số T</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("LoadCustomer", "Home",new {type = 6})">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+
+

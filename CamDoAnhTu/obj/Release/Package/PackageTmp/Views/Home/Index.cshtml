@@ -1,0 +1,53 @@
+﻿@using CamDoAnhTu.Models
+@model Customer
+@{
+    List<Loan> lst = (List<Loan>)ViewData["Loan"];
+    User us = new User();
+    HttpCookie reqCookies = Request.Cookies["userInfo"];
+
+    if (reqCookies != null)
+    {
+        us.UserName = reqCookies["username"].ToString();
+        us.PassWord = reqCookies["password"].ToString();
+        us.Permission = Int32.Parse(reqCookies["permisson"].ToString());
+        us.id_cuahang = Int32.Parse(reqCookies["id_cuahang"].ToString());
+    }
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cầm đồ Anh Tú</h2>
+
+<div id="plan-info">
+
+    @if (us.id_cuahang == -1)
+    {
+        @Html.Action("Management", "Home", new { type = -1 })
+        @Html.Action("Management", "Home", new { type = 1 })
+        @Html.Action("Management", "Home", new { type = 2 })
+        @Html.Action("Management", "Home", new { type = 3 })
+        @Html.Action("Management", "Home", new { type = 4 })
+        @Html.Action("XE1", "Home")
+    }
+    else if (us.id_cuahang == 1)
+    {
+        @Html.Action("Management", "Home", new { type = 1 })
+    }
+    else if (us.id_cuahang == 2)
+    {
+        @Html.Action("Management", "Home", new { type = 2 })
+    }
+    else if (us.id_cuahang == 3)
+    {
+        @Html.Action("Management", "Home", new { type = 3 })
+    }
+    else if (us.id_cuahang == 4)
+    {
+        @Html.Action("Management", "Home", new { type = 4 })
+    }
+
+    
+</div>

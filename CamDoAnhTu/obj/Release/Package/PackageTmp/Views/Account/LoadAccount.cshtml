@@ -1,0 +1,69 @@
+﻿@using CamDoAnhTu.Models;
+
+@{
+    ViewBag.Title = "LoadAccount";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <!-- DataTables CSS -->
+    <link href="~/Assets/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="~/Assets/Admin/bower_components/datatables/media/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="~/Assets/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" />
+
+}
+@section js{
+    <script src="~/Assets/Admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/Assets/jquery-ui.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Assets/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="~/Assets/Admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+}
+<a class="btn btn-success" href="@Url.Action("LoadCustomer", "Home")" role="button" style="margin:10px">
+    <i class="fa fa-home"></i>Trang chủ
+</a>
+<hr />
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>PassWord</th>
+            <th>Quyền</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (User us in Model)
+        {
+            <tr>
+                <td>@us.UserName</td>
+                <td>@us.PassWord</td>
+                @if (us.Permission == 1)
+                {
+                    <td>Admin</td>
+                }
+                else
+                {
+                    <td>Nhân Viên</td>
+                }
+                <td>
+                    <a class="btn btn-primary btn-xs" href="@Url.Action("ChangePassWord","Account",new {uname = @us.UserName } )" role="button" title="Chỉnh sửa">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

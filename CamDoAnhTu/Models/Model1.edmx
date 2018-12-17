@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="camcdb3d_camdothanhluanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Ngaydongtien" Type="datetime" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="status" Type="int" />
+          <Property Name="loanid" Type="int" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Message" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Loan" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RemainingAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DayPaids" Type="int" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayNo" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayBonus" Type="int" />
+          <Property Name="OldCode" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CodeSort" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="songayno" Type="int" />
+          <Property Name="nodung" Type="bit" />
+          <Property Name="tentaisan" Type="nvarchar(max)" />
+          <Property Name="loaigiayto" Type="int" Nullable="false" />
+          <Property Name="tiengoc" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="lai" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="IDCus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Type" Type="bit" Nullable="false" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="PassWord" Type="varchar" MaxLength="50" />
+          <Property Name="Permission" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cuahang" Type="int" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="GetCustomerEven" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan" />
+        <Function Name="GetCustomerOdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan" />
+        <Function Name="GetTienGoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTienLai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTienLaiThatTe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SumMoneyByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="camcdb3d_camdothanhluan">
+          <Parameter Name="datetimeinput" Type="datetime" Mode="In" />
+          <Parameter Name="type" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="camcdb3d_camdothanhluanModelStoreContainer">
+          <EntitySet Name="history" EntityType="Self.history" Schema="camcdb3d_camdothanhluan" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="camcdb3d_camdothanhluan" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loan" EntityType="Self.Loan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="camcdb3d_camdothanhluanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ngaydongtien" Type="DateTime" Precision="3" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="loanid" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="camcdb3d_camdothanhluanModel.Customerhistory" FromRole="history" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Message1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Loan" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RemainingAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DayPaids" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayNo" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayBonus" Type="Int32" />
+          <Property Name="OldCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CodeSort" Type="Int32" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="songayno" Type="Int32" />
+          <Property Name="nodung" Type="Boolean" />
+          <Property Name="tentaisan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="loaigiayto" Type="Int32" Nullable="false" />
+          <Property Name="tiengoc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="lai" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Loans" Relationship="camcdb3d_camdothanhluanModel.CustomerLoan" FromRole="Customer" ToRole="Loan" />
+          <NavigationProperty Name="histories" Relationship="camcdb3d_camdothanhluanModel.Customerhistory" FromRole="Customer" ToRole="history" />
+        </EntityType>
+        <EntityType Name="Loan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDCus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Boolean" Nullable="false" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Customer" Relationship="camcdb3d_camdothanhluanModel.CustomerLoan" FromRole="Loan" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Permission" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cuahang" Type="Int32" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="CamdoAnhTuEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="histories" EntityType="Self.history" />
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Loans" EntityType="Self.Loan" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <FunctionImport Name="GetCustomerEven" ReturnType="Collection(camcdb3d_camdothanhluanModel.GetCustomerEven_Result)" />
+          <FunctionImport Name="GetCustomerOdd" ReturnType="Collection(camcdb3d_camdothanhluanModel.GetCustomerOdd_Result)" />
+          <FunctionImport Name="GetTienGoc" ReturnType="Collection(Decimal)">
+          <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTienLai" ReturnType="Collection(Decimal)">
+          <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTienLaiThatTe" ReturnType="Collection(Decimal)">
+          <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SumMoneyByCode" ReturnType="Collection(camcdb3d_camdothanhluanModel.SumMoneyByCode_Result)">
+            <Parameter Name="datetimeinput" Mode="In" Type="DateTime" />
+            <Parameter Name="type" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="CustomerLoan" Association="camcdb3d_camdothanhluanModel.CustomerLoan">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Loan" EntitySet="Loans" />
+          </AssociationSet>
+          <AssociationSet Name="Customerhistory" Association="camcdb3d_camdothanhluanModel.Customerhistory">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="history" EntitySet="histories" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="GetCustomerEven_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="Loan" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="AmountPaid" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="RemainingAmount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="DayPaids" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="NgayNo" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DayBonus" Nullable="true" />
+          <Property Type="String" Name="OldCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="CodeSort" Nullable="true" />
+          <Property Type="Int32" Name="type" Nullable="true" />
+          <Property Type="Int32" Name="songayno" Nullable="true" />
+          <Property Type="Boolean" Name="nodung" Nullable="true" />
+          <Property Type="String" Name="tentaisan" Nullable="true" />
+          <Property Type="Int32" Name="loaigiayto" Nullable="false" />
+          <Property Type="Decimal" Name="tiengoc" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="lai" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetCustomerOdd_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="Loan" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="AmountPaid" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="RemainingAmount" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="DayPaids" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="NgayNo" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="DayBonus" Nullable="true" />
+          <Property Type="String" Name="OldCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="CodeSort" Nullable="true" />
+          <Property Type="Int32" Name="type" Nullable="true" />
+          <Property Type="Int32" Name="songayno" Nullable="true" />
+          <Property Type="Boolean" Name="nodung" Nullable="true" />
+          <Property Type="String" Name="tentaisan" Nullable="true" />
+          <Property Type="Int32" Name="loaigiayto" Nullable="false" />
+          <Property Type="Decimal" Name="tiengoc" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="lai" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SumMoneyByCode_Result">
+          <Property Type="String" Name="subcode" Nullable="true" MaxLength="1" />
+          <Property Type="Decimal" Name="sumval" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
+        <Association Name="CustomerLoan">
+          <End Type="camcdb3d_camdothanhluanModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="camcdb3d_camdothanhluanModel.Loan" Role="Loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Loan">
+              <PropertyRef Name="IDCus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Customerhistory">
+          <End Type="camcdb3d_camdothanhluanModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="camcdb3d_camdothanhluanModel.history" Role="history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="camcdb3d_camdothanhluanModelStoreContainer" CdmEntityContainer="CamdoAnhTuEntities1">
+          <EntitySetMapping Name="histories">
+            <EntityTypeMapping TypeName="camcdb3d_camdothanhluanModel.history">
+              <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Ngaydongtien" ColumnName="Ngaydongtien" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="loanid" ColumnName="loanid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="camcdb3d_camdothanhluanModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Message1" ColumnName="Message" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="camcdb3d_camdothanhluanModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Loan" ColumnName="Loan" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+                <ScalarProperty Name="DayPaids" ColumnName="DayPaids" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NgayNo" ColumnName="NgayNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DayBonus" ColumnName="DayBonus" />
+                <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CodeSort" ColumnName="CodeSort" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="songayno" ColumnName="songayno" />
+                <ScalarProperty Name="nodung" ColumnName="nodung" />
+                <ScalarProperty Name="tentaisan" ColumnName="tentaisan" />
+                <ScalarProperty Name="loaigiayto" ColumnName="loaigiayto" />
+                <ScalarProperty Name="tiengoc" ColumnName="tiengoc" />
+                <ScalarProperty Name="lai" ColumnName="lai" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loans">
+            <EntityTypeMapping TypeName="camcdb3d_camdothanhluanModel.Loan">
+              <MappingFragment StoreEntitySet="Loan">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IDCus" ColumnName="IDCus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="money" ColumnName="money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="camcdb3d_camdothanhluanModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="id_cuahang" ColumnName="id_cuahang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerEven" FunctionName="camcdb3d_camdothanhluanModel.Store.GetCustomerEven">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="camcdb3d_camdothanhluanModel.GetCustomerEven_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Loan" ColumnName="Loan" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+                <ScalarProperty Name="DayPaids" ColumnName="DayPaids" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NgayNo" ColumnName="NgayNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DayBonus" ColumnName="DayBonus" />
+                <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CodeSort" ColumnName="CodeSort" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="songayno" ColumnName="songayno" />
+                <ScalarProperty Name="nodung" ColumnName="nodung" />
+                <ScalarProperty Name="tentaisan" ColumnName="tentaisan" />
+                <ScalarProperty Name="loaigiayto" ColumnName="loaigiayto" />
+                <ScalarProperty Name="tiengoc" ColumnName="tiengoc" />
+                <ScalarProperty Name="lai" ColumnName="lai" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerOdd" FunctionName="camcdb3d_camdothanhluanModel.Store.GetCustomerOdd">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="camcdb3d_camdothanhluanModel.GetCustomerOdd_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Loan" ColumnName="Loan" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+                <ScalarProperty Name="DayPaids" ColumnName="DayPaids" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NgayNo" ColumnName="NgayNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DayBonus" ColumnName="DayBonus" />
+                <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CodeSort" ColumnName="CodeSort" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="songayno" ColumnName="songayno" />
+                <ScalarProperty Name="nodung" ColumnName="nodung" />
+                <ScalarProperty Name="tentaisan" ColumnName="tentaisan" />
+                <ScalarProperty Name="loaigiayto" ColumnName="loaigiayto" />
+                <ScalarProperty Name="tiengoc" ColumnName="tiengoc" />
+                <ScalarProperty Name="lai" ColumnName="lai" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTienGoc" FunctionName="camcdb3d_camdothanhluanModel.Store.GetTienGoc" />
+          <FunctionImportMapping FunctionImportName="GetTienLai" FunctionName="camcdb3d_camdothanhluanModel.Store.GetTienLai" />
+          <FunctionImportMapping FunctionImportName="GetTienLaiThatTe" FunctionName="camcdb3d_camdothanhluanModel.Store.GetTienLaiThatTe" />
+          <FunctionImportMapping FunctionImportName="SumMoneyByCode" FunctionName="camcdb3d_camdothanhluanModel.Store.SumMoneyByCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="camcdb3d_camdothanhluanModel.SumMoneyByCode_Result">
+                <ScalarProperty Name="subcode" ColumnName="subcode" />
+                <ScalarProperty Name="sumval" ColumnName="sumval" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

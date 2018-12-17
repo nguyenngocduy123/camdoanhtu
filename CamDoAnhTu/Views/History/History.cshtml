@@ -1,0 +1,112 @@
+﻿@using CamDoAnhTu.Models;
+
+@model List<history>
+@{
+    ViewBag.Title = "Lịch sử khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int type = (int)ViewBag.type;
+}
+
+@section css{
+    <!-- DataTables CSS -->
+    <link href="~/Assets/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+
+    <link href="~/Assets/Admin/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="~/Assets/jquery-ui-1.11.2.custom/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .dropdown {
+            font-size: 21px;
+        }
+    </style>
+
+}
+
+@section js{
+    <script src="~/Assets/Admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Assets/Admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="~/Assets/Admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+
+        $('a[data-del-proid]').on('click', function () {
+            var loanid = $(this).attr('data-del-proid');
+            $("#txtRemoveId").val(loanid);
+            $("#frmRemoveItem").submit();
+
+        });
+
+    </script>
+    @*<script>
+            $(document).ready(function () {
+                $('a[data-del-proid]').on('click', function () {
+                    var recordToDelete = $(this).attr("data-del-proid");
+
+                    $.ajax({
+                        url: "/Home/UpdateLoan", //url path to the controller action
+                        type: "POST",
+                        data: {
+                            loanid: recordToDelete
+                        }
+                    })
+                        .success(function (data) {
+
+                        });
+                });
+            });
+        </script>*@
+
+}
+
+
+    <div class="body-content" style="background-color: white;">
+
+        @if (type == -2)
+        {
+            <a class="btn btn-success" href="@Url.Action("LoadCustomerXE1", "Home")" role="button">
+                <i class="fa fa-home"></i>Trang chủ
+            </a>
+        }
+        else
+        {
+            <a class="btn btn-success" href="@Url.Action("LoadCustomer", "Home", new {type = type})" role="button">
+                <i class="fa fa-home"></i>Trang chủ
+            </a>
+        }
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead style="background-color: gold">
+                        <tr>
+                            <th>Mã số khách hàng</th>
+                            <th>Ngày đóng tiền</th>
+                            <th>Nội dung lịch sử</th>
+                            <th>Giá tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (history p in Model)
+                        {
+                            <tr>
+                                <td>@p.CustomerId</td>
+                                <td>@p.Ngaydongtien</td>
+                                <td>@p.Detail</td>
+                                <td>@p.price</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
