@@ -180,7 +180,7 @@
     <script>
         function chuadongtien(idLoan, permission) {
 
-            if (permission == 0 ) {
+            if (permission == 0) {
                 return;
             }
 
@@ -419,6 +419,12 @@
 
 
 
+
+
+
+
+
+
                 }
                 @ViewBag.Message1
 
@@ -457,12 +463,11 @@
                         <i class="fa fa-refresh"></i>Cập nhập
                     </a>
 
-                    @if (type != -1 && type != -2 && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomer", "Home",new{type = type})" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomer", "Home",new{type = type})" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
 
                 </div>
                 <form class="navbar-form navbar-left" role="search" action="/Home/Search" style="height:50px">
@@ -561,12 +566,11 @@ else
                         <i class="fa fa-refresh"></i>Cập nhập
                     </a>
 
-                    @if (type != -1 && type != -2 && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomer", "Home",new{type = type})" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomer", "Home",new{type = type})" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
 
                 </div>
                 <form class="form-horizontal" role="search" action="/Home/Search" style="height:50px; margin-bottom:50px;margin-top:10px">
@@ -823,9 +827,9 @@ else
                                                         <a style="width: 47px; text-align: left; float: left" class="btn btn-success" title="Đã đóng tiền" role="button" id="item_@(i.ID)">
                                                             @i.Date.ToString("dd.MM")
                                                         </a>
-                                                    }                                                    
+                                                    }
 
-                                                    
+
                                                 }
                                                 <a data-toggle="modal" data-id="@p.Code" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#addBookDialog">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -868,7 +872,7 @@ else
                                                 }
                                                 else // chi xem
                                                 {
-                                                    
+
                                                 }
                                             </td>
                                         </tr>
@@ -1014,7 +1018,7 @@ else
                                                 }
                                                 else // chi xem
                                                 {
-                                                    
+
                                                 }
                                             </td>
                                         </tr>
@@ -1160,7 +1164,7 @@ else
                                                 }
                                                 else // chi xem
                                                 {
-                                                    
+
                                                 }
                                             </td>
                                         </tr>

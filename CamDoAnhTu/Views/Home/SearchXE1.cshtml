@@ -364,12 +364,11 @@ listItems = new List<SelectListItem>
                     <a class="btn btn-warning" href="@Url.Action("LoadCustomerOdd","Home")" role="button" style="float:right">
                         <i class="fa fa-apple"></i>Đội lẻ
                     </a>
-                    @if (us != null && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                     <a href="@Url.Action(" TimKiemNoKhachHang", "Home" )" class="btn btn-dropbox">
                         <i class="fa fa-search"></i>&nbsp;Tìm khách hàng nợ ngày chẵn
                     </a>
@@ -457,12 +456,11 @@ else
                     <a class="btn btn-warning" href="@Url.Action("LoadCustomerOdd","Home")" role="button" style="float:right">
                         <i class="fa fa-apple"></i>Đội lẻ
                     </a>
-                    @if (us != null && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                     <a href="@Url.Action("TimKiemNoKhachHang", "Home" )" class="btn btn-dropbox">
                         <i class="fa fa-search"></i>&nbsp;Tìm khách hàng nợ ngày chẵn
                     </a>

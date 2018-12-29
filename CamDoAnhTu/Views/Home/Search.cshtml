@@ -337,12 +337,11 @@
                     <a class="btn btn-success" href="@Url.Action("Refresh","Home")" role="button" onclick="return confirm('Bạn có thật sự muốn refresh ?')">
                         <i class="fa fa-refresh"></i>Cập nhập
                     </a>
-                    @if (us != null && us.Permission != 0)
-                        {
-                            <a href="@Url.Action("AddCustomer", "Home")" class="btn btn-default">
-                                <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                            </a>
-                        }
+
+                    <a href="@Url.Action("AddCustomer", "Home")" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                     <a href="@Url.Action("TimKiemNoKhachHang", "Home")" class="btn btn-dropbox">
                         <i class="fa fa-search"></i>&nbsp;Tìm khách hàng nợ ngày chẵn
                     </a>
@@ -418,12 +417,11 @@ else
                     <a class="btn btn-success" href="@Url.Action("Refresh","Home")" role="button" onclick="return confirm('Bạn có thật sự muốn refresh ?')">
                         <i class="fa fa-refresh"></i>Cập nhập
                     </a>
-                    @if (us != null && us.Permission != 0)
-                        {
-                            <a href="@Url.Action("AddCustomer", "Home",new{type=type})" class="btn btn-default">
-                                <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                            </a>
-                        }
+
+                    <a href="@Url.Action("AddCustomer", "Home",new{type=type})" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                 </div>
                 <form class="form-horizontal" role="search" action="/Home/Search" style="height:50px; margin-bottom:50px;margin-top:10px">
                     <div class="form-group">

@@ -1425,7 +1425,7 @@ namespace CamDoAnhTu.Controllers
                         ctx.Configuration.ValidateOnSaveEnabled = false;
                         Customer csCustomer = new Customer();
                         item = ctx.Loans.Where(p => p.ID == loanid && p.IDCus == idcus).FirstOrDefault();
-
+                        timetemp = item.Date.ToShortDateString();
                         item.Status = item.Status + 1;
 
                         if (item.Status >= 2)
@@ -1445,7 +1445,7 @@ namespace CamDoAnhTu.Controllers
                             t = 0;
                             WriteHistory(csCustomer, 0, 0, loanid);
                         }
-
+                        loanid++;
                         ctx.SaveChanges();
                     }
                 }

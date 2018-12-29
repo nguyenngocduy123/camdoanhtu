@@ -320,7 +320,7 @@ listItems = new List<SelectListItem>
 
     <script type="text/javascript">
         $(function () {
-            
+
             $('#pagesize').on('change', function () {
                 $('#form1').submit();
             });
@@ -367,12 +367,11 @@ listItems = new List<SelectListItem>
                     <a class="btn btn-warning" href="@Url.Action("LoadCustomerOdd","Home")" role="button" style="float:right">
                         <i class="fa fa-apple"></i>Đội lẻ
                     </a>
-                    @if (us != null && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                     <a href="@Url.Action(" TimKiemNoKhachHang", "Home" )" class="btn btn-dropbox">
                         <i class="fa fa-search"></i>&nbsp;Tìm khách hàng nợ ngày chẵn
                     </a>
@@ -463,12 +462,11 @@ else
                     <a class="btn btn-warning" href="@Url.Action("LoadCustomerOdd","Home")" role="button" style="float:right">
                         <i class="fa fa-apple"></i>Đội lẻ
                     </a>
-                    @if (us != null && us.Permission != 0)
-                    {
-                        <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
-                            <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
-                        </a>
-                    }
+
+                    <a href="@Url.Action("AddCustomerXE1", "Home" )" class="btn btn-default">
+                        <i class="fa fa-plus"></i>&nbsp;Thêm khách hàng
+                    </a>
+
                     <a href="@Url.Action("TimKiemNoKhachHang", "Home" )" class="btn btn-dropbox">
                         <i class="fa fa-search"></i>&nbsp;Tìm khách hàng nợ ngày chẵn
                     </a>
@@ -607,8 +605,8 @@ else
                                             </td>
                                             <td>
                                                 @string.Format("{0:N0}", p.Loan)
-                                                <p>@string.Format("{0:N0}", p.Price)</p>                                             
-                                              
+                                                <p>@string.Format("{0:N0}", p.Price)</p>
+
                                                 <p style="color: blue">@p.Note</p>
                                             </td>
                                             <td>
@@ -681,7 +679,7 @@ else
                                         if (p.nodung == true)
                                         {
                                             <tr style="color: red">
-                                                <td >@p.CodeSort</td>
+                                                <td>@p.CodeSort</td>
 
                                                 @if (p.Code.Contains("ZA") || p.Code.Contains("ZB") || p.Code.Contains("ZC"))
                                                 {
