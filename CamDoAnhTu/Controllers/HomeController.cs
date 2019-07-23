@@ -101,41 +101,6 @@ namespace CamDoAnhTu.Controllers
 
                 var lishExample = ctx.Customers.Where(p => p.type == 4).ToList();
 
-                //foreach (var cs in lishExample)
-                //{
-                //    if (cs.Code.Contains("ZA") || cs.Code.Contains("ZB") || cs.Code.Contains("ZC"))
-                //    {
-                //        int code = Int32.Parse(cs.Code.Substring(2, cs.Code.Length - 2));
-
-                //        if (cs.Code[1] == 'A')
-                //        {
-                //            cs.CodeSort = code + 1000;
-                //        }
-                //        else
-                //        {
-                //            cs.CodeSort = (((cs.Code[1] - 'A') + 1) * 1000) + code;
-                //        }
-                //    }
-                //    else if ((cs.Code[0] >= 'A' && cs.Code[0] <= 'Z') ||
-                //        (cs.Code[0] >= 'a' && cs.Code[0] <= 'z') && cs.CodeSort == null)
-                //    {
-                //        int code = Int32.Parse(cs.Code.Substring(1, cs.Code.Length - 1));
-
-                //        if (cs.Code[0] == 'A')
-                //        {
-                //            cs.CodeSort = code + 1000;
-                //        }
-                //        else
-                //        {
-                //            cs.CodeSort = (((cs.Code[0] - 'A') + 1) * 1000) + code;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        cs.CodeSort = Int32.Parse(cs.Code);
-                //    }
-                //}
-
                 if (tiengoc != null)
                 {
                     ViewBag.tiengoc = $"{tiengoc.Value:N0}";
@@ -747,24 +712,6 @@ namespace CamDoAnhTu.Controllers
                     return View(myViewModel);
                 }
 
-                //if (myViewModel.model.Price < 5 || myViewModel.model.Price > 20000000)
-                //{
-                //    ViewBag.Message = "Số tiền trong 1 ngày không họp lệ";
-                //    return View(myViewModel);
-                //}
-
-                //if (myViewModel.model.Loan < 5 || myViewModel.model.Loan > 20000000)
-                //{
-                //    ViewBag.Message = "Tổng tiền không họp lệ";
-                //    return View(myViewModel);
-                //}
-
-                //if (myViewModel.model.tiengoc < 5 || myViewModel.model.tiengoc > 20000000)
-                //{
-                //    ViewBag.Message = "Số tiền gốc không hợp lệ";
-                //    return View(myViewModel);
-                //}
-
                 myViewModel.model.DayPaids = 0;
                 myViewModel.model.AmountPaid = 0;
                 myViewModel.model.RemainingAmount = myViewModel.model.Loan;
@@ -1013,7 +960,7 @@ namespace CamDoAnhTu.Controllers
                 ctx.Customers.Add(model);
                 ctx.SaveChanges();
 
-                int day = model.songayno == 0 ? 0 : (int)model.songayno;
+                int day = model.songayno.HasValue ? (int)model.songayno : 1;
                 DateTime k = model.StartDate;
 
                 for (int i = 1; i <= 60; i++)
@@ -1113,7 +1060,7 @@ namespace CamDoAnhTu.Controllers
                         ctx.Loans.Remove(item);
                     }
 
-                    int day = model.songayno == 0 ? 0 : (int)model.songayno;
+                    int day = model.songayno.HasValue ? (int)model.songayno : 1;
                     DateTime k = model.StartDate;
 
                     for (int i = 1; i <= 60; i++)
@@ -1799,6 +1746,7 @@ namespace CamDoAnhTu.Controllers
                         temp.Code = Helper.Helper.RandomString(4);
                         temp.Loan = cus.Loan;
                         temp.tiengoc = cus.tiengoc;
+                        temp.OldCode = cus.Code;
                         ctx.Customers.Add(temp);
                         foreach (var item in lstLoans)
                         {
