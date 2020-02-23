@@ -156,6 +156,10 @@ namespace CamDoAnhTu.Controllers
                                 && (p.Description == "End" || p.DayPaids == (p.Loan / p.Price) || p.NgayNo < 59)
                                 && p.StartDate >= dtcompareNewCs).ToList();
                 }
+                else
+                {
+                    return RedirectToAction("LoadCustomerXE1", "Home");
+                }
 
                 int count1 = list1.Count();
                 int nPages = count1 / pageSz + (count1 % pageSz > 0 ? 1 : 0);
@@ -863,20 +867,22 @@ namespace CamDoAnhTu.Controllers
 
                     if (update == 1)
                     {
-                        pro = ctx.Customers.Where(p => p.Code == pro.Code).FirstOrDefault();
+                        if(pro.Price.HasValue) {
+                            pro = ctx.Customers.Where(p => p.Code == pro.Code).FirstOrDefault();
 
-                        int day = Int32.Parse(pro.Loan.ToString()) / Int32.Parse(pro.Price.ToString());
+                            int day = Int32.Parse(pro.Loan.ToString()) / Int32.Parse(pro.Price.ToString());
 
-                        for (int s = 1; s <= day; s++)
-                        {
-                            Loan temp = new Loan();
-                            temp.Date = pro.StartDate.AddDays(s);
-                            temp.IDCus = pro.Code;
-                            temp.Status = 0;
-                            ctx.Loans.Add(temp);
+                            for (int s = 1; s <= day; s++)
+                            {
+                                Loan temp = new Loan();
+                                temp.Date = pro.StartDate.AddDays(s);
+                                temp.IDCus = pro.Code;
+                                temp.Status = 0;
+                                ctx.Loans.Add(temp);
+                                ctx.SaveChanges();
+                            }
                             ctx.SaveChanges();
-                        }
-                        ctx.SaveChanges();
+                        }                       
                     }
                 }
 
