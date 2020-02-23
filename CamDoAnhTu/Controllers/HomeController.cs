@@ -960,7 +960,7 @@ namespace CamDoAnhTu.Controllers
                 ctx.Customers.Add(model);
                 ctx.SaveChanges();
 
-                int day = model.songayno.HasValue ? (int)model.songayno : 1;
+                int day = model.songayno == 0 ? 0 : (int)model.songayno;
                 DateTime k = model.StartDate;
 
                 for (int i = 1; i <= 60; i++)
@@ -1060,7 +1060,7 @@ namespace CamDoAnhTu.Controllers
                         ctx.Loans.Remove(item);
                     }
 
-                    int day = model.songayno.HasValue ? (int)model.songayno : 1;
+                    int day = model.songayno == 0 ? 0 : (int)model.songayno;
                     DateTime k = model.StartDate;
 
                     for (int i = 1; i <= 60; i++)
